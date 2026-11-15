@@ -167,6 +167,15 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         return;
     }
 
+    if (message.action === "openPdf") {
+        chrome.tabs.create({
+            url: chrome.runtime.getURL("pdf-viewer.html")
+        });
+    
+        sendResponse({ success: true });
+        return;
+    }
+
     translateText(message.text)
         .then((translation) => {
             sendResponse({
