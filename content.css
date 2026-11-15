@@ -1,53 +1,53 @@
-/* Import Noto Nastaliq Urdu directly from Google Fonts */
+/* Import Noto Nastaliq Urdu directly from Google Fonts so it works on any website */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap');
 
 #en-ur-translator-popup {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  width: 420px;
-  max-width: 90vw;
-  max-height: 75vh;
-  overflow-y: auto;
-  background-color: #ffffff;
-  color: #1a1a1a;
-  border: 1px solid #d1d5db;
-  border-top: 4px solid #047857;
-  border-radius: 8px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-  z-index: 2147483647;
-  padding: 16px;
-  font-family: system-ui, -apple-system, sans-serif;
+  position: fixed !important;
+  top: 20px !important;
+  right: 20px !important;
+  width: 450px !important;
+  max-width: 90vw !important;
+  max-height: 75vh !important;
+  overflow-y: auto !important;
+  background-color: #ffffff !important;
+  color: #1a1a1a !important;
+  border: 1px solid #d1d5db !important;
+  border-top: 4px solid #047857 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2) !important;
+  z-index: 2147483647 !important;
+  padding: 16px !important;
+  font-family: system-ui, -apple-system, sans-serif !important;
   display: none;
+  box-sizing: border-box !important;
 }
 
 #en-ur-popup-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #e5e7eb;
-  padding-bottom: 8px;
-  margin-bottom: 12px;
-  font-size: 13px;
-  font-weight: bold;
-  color: #047857;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  border-bottom: 1px solid #e5e7eb !important;
+  padding-bottom: 8px !important;
+  margin-bottom: 12px !important;
+  font-size: 13px !important;
+  font-weight: bold !important;
+  color: #047857 !important;
 }
 
 #en-ur-close-btn {
-  background: none;
-  border: none;
-  font-size: 18px;
-  cursor: pointer;
-  color: #6b7280;
+  background: none !important;
+  border: none !important;
+  font-size: 18px !important;
+  cursor: pointer !important;
+  color: #6b7280 !important;
 }
 
 #en-ur-translated-text {
-  font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', sans-serif;
-  direction: rtl;
-  text-align: right;
-  font-size: 16px;
-  line-height: 1.8;
-  color: #111827;
-  white-space: pre-wrap;
+  font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', sans-serif !important;
+  direction: rtl !important;
+  text-align: right !important;
+  font-size: 18px !important;
+  line-height: 1.8 !important;
+  color: #111827 !important;
+  white-space: pre-wrap !important;
 }
-
