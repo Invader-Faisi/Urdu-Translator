@@ -1,53 +1,45 @@
-
 {
   "manifest_version": 3,
   "name": "Urdu Translator",
-  "version": "2.1.0",
-  "description": "Translate selected webpage and PDF text into Urdu.",
-
+  "version": "1.0",
+  "description": "Translate selected text or PDF files into Urdu on web pages and custom viewer.",
   "permissions": [
     "activeTab",
     "scripting",
-    "storage"
+    "storage",
+    "tabs"
   ],
-
   "host_permissions": [
-    "https://api.mymemory.translated.net/*"
+    "<all_urls>"
   ],
-
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
   "background": {
     "service_worker": "background.js"
   },
-
-  "action": {
-    "default_title": "Click to enable or disable Urdu Translator",
-    "default_icon": {
-      "16": "icons/icon16.png",
-      "32": "icons/icon32.png",
-      "48": "icons/icon48.png",
-      "64": "icons/icon64.png",
-      "128": "icons/icon128.png",
-      "256": "icons/icon256.png"
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["styles.css"],
+      "run_at": "document_idle"
     }
-  },
-
-  "commands": {
-    "open-pdf-translator": {
-      "suggested_key": {
-        "default": "Alt+Shift+P"
-      },
-      "description": "Open Urdu PDF Translator"
-    }
-  },
-
+  ],
   "web_accessible_resources": [
     {
       "resources": [
-        "lib/*"
+        "pdf-viewer.html",
+        "pdf-viewer.js",
+        "pdf-viewer.css",
+        "lib/pdf.worker.mjs"
       ],
-      "matches": [
-        "<all_urls>"
-      ]
+      "matches": ["<all_urls>"]
     }
   ]
 }
