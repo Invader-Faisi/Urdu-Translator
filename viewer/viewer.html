@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' http://localhost https: data: blob: 'unsafe-inline' 'unsafe-eval';">
+  <title>En-Ur PDF Translator</title>
+  <link rel="stylesheet" href="viewer.css">
+  <link rel="stylesheet" href="../content.css">
+  <link rel="stylesheet" href="pdf_viewer.css">
+</head>
+<body>
+  <div id="top-bar">
+    <div class="brand">
+      <img src="../icons/icon16.png" alt="Logo" style="width: 16px; height: 16px; vertical-align: middle; margin-right: 8px;">
+      En-Ur PDF Translator
+    </div>
+    <div class="controls">
+      <input type="file" id="file-input" accept="application/pdf" />
+      
+      <!-- Zoom Controls -->
+      <button id="zoom-out-btn" title="Zoom Out">-</button>
+      <span id="zoom-level">100%</span>
+      <button id="zoom-in-btn" title="Zoom In">+</button>
+
+      <span>Page: <strong id="current-page">0</strong> / <strong id="total-pages">0</strong></span>
+      <input type="number" id="page-input" min="1" placeholder="Go..." />
+      <button id="go-btn">Go</button>
+    </div>
+  </div>
+
+  <div id="pdf-container"></div>
+
+  <!-- Local PDF.js core library -->
+  <script src="pdf.mjs" type="module"></script>
+  <script src="viewer.js" type="module"></script>
+  <!-- Reuse content.js so highlighting text triggers the top-right popup -->
+  <script src="../content.js"></script>
+</body>
+</html>

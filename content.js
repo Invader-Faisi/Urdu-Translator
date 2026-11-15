@@ -1,82 +1,70 @@
-let translationBox = null;
-let isEnabled = true;
-
-// Check initial status
-chrome.storage.local.get(["extensionEnabled"], (data) => {
-  isEnabled = data.extensionEnabled ?? true;
-});
-
-chrome.storage.onChanged.addListener((changes) => {
-  if (changes.extensionEnabled) {
-    isEnabled = changes.extensionEnabled.newValue;
-    if (!isEnabled && translationBox) {
-      translationBox.remove();
-      translationBox = null;
-    }
-  }
-});
-
-document.addEventListener('mouseup', async (e) => {
-  if (!isEnabled) return;
-
-  const selectedText = window.getSelection().toString().trim();
-  if (!selectedText) {
-    if (translationBox && !translationBox.contains(e.target)) {
-      translationBox.remove();
-      translationBox = null;
-    }
-    return;
-  }
-
-  const rect = window.getSelection().getRangeAt(0).getBoundingClientRect();
-  showTranslationPopup(rect.left + window.scrollX, rect.bottom + window.scrollY + 5, selectedText);
-});
-
-function showTranslationPopup(x, y, text) {
-  if (translationBox) {
-    translationBox.remove();
-  }
-
-  translationBox = document.createElement('div');
-  translationBox.id = 'urdu-translator-popup';
-  translationBox.innerHTML = `
-    <div class="ut-header">
-      <span>Urdu Translation</span>
-      <button id="ut-close">×</button>
+// Prevent duplicate initialization if loaded multiple times in the PDF viewer tab
+if (!document.getElementById("en-ur-translator-popup")) {
+  // Create the top-right translation popup container once
+  const popup = document.createElement("div");
+  popup.id = "en-ur-translator-popup";
+  popup.innerHTML = `
+    <div id="en-ur-popup-header">
+      <span>English → Urdu Translation</span>
+      <button id="en-ur-close-btn" title="Close">&times;</button>
     </div>
-    <div class="ut-body">
-      <p id="ut-content">Translating...</p>
-    </div>
+    <div id="en-ur-translated-text">Translating...</div>
   `;
-  document.body.appendChild(translationBox);
+  document.body.appendChild(popup);
 
-  translationBox.style.left = `${Math.min(x, window.innerWidth - 320)}px`;
-  translationBox.style.top = `${y}px`;
+  const textContainer = document.getElementById("en-ur-translated-text");
+  const closeBtn = document.getElementById("en-ur-close-btn");
 
-  document.getElementById('ut-close').onclick = () => {
-    translationBox.remove();
-    translationBox = null;
-  };
+  closeBtn.addEventListener("click", () => {
+    popup.style.display = "none";
+  });
 
-  // Simulated or fetched translation (Placeholder API integration point)
-  translateText(text).then((translated) => {
-    const contentEl = document.getElementById('ut-content');
-    if (contentEl) {
-      contentEl.textContent = translated;
+  // Listen for text selection across web pages and the local PDF viewer
+  document.addEventListener("mouseup", (event) => {
+    // Ignore clicks inside the popup itself
+    if (popup.contains(event.target)) return;
+
+    const selectedText = window.getSelection().toString().trim();
+
+    if (selectedText.length > 0) {
+      popup.style.display = "block";
+      textContainer.innerText = "Translating...";
+
+      document.addEventListener("mouseup", (event) => {
+    if (popup.contains(event.target)) return;
+
+    const selectedText = window.getSelection().toString().trim();
+
+    if (selectedText.length > 0) {
+      popup.style.display = "block";
+      textContainer.innerText = "Translating...";
+
+      // Safely check if the extension context is still valid before sending message
+      try {
+        if (!chrome.runtime?.id) {
+          textContainer.innerText = "Extension updated. Please refresh this page.";
+          return;
+        }
+
+        chrome.runtime.sendMessage(
+          { action: "translate", text: selectedText },
+          (response) => {
+            if (chrome.runtime.lastError) {
+              textContainer.innerText = "Extension context invalidated. Please refresh the page.";
+              return;
+            }
+            if (response && response.success) {
+              textContainer.innerText = response.translation;
+            } else {
+              textContainer.innerText = "Translation failed. Check your connection.";
+            }
+          }
+        );
+      } catch (err) {
+        textContainer.innerText = "Extension updated. Please refresh the page.";
+      }
     }
   });
-}
-
-async function translateText(text) {
-  try {
-    // Public free MyMemory translation API endpoint as a reliable fallback
-    const res = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=en|ur`);
-    const data = await res.json();
-    if (data && data.responseData && data.responseData.translatedText) {
-      return data.responseData.translatedText;
     }
-  } catch (err) {
-    console.error("Translation error:", err);
-  }
-  return "ترجمہ دستیاب نہیں ہے (Translation failed)";
+  });
 }

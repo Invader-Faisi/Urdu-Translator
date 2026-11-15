@@ -1,0 +1,53 @@
+/* Import Noto Nastaliq Urdu directly from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap');
+
+#en-ur-translator-popup {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 420px;
+  max-width: 90vw;
+  max-height: 75vh;
+  overflow-y: auto;
+  background-color: #ffffff;
+  color: #1a1a1a;
+  border: 1px solid #d1d5db;
+  border-top: 4px solid #047857;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  z-index: 2147483647;
+  padding: 16px;
+  font-family: system-ui, -apple-system, sans-serif;
+  display: none;
+}
+
+#en-ur-popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #047857;
+}
+
+#en-ur-close-btn {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #6b7280;
+}
+
+#en-ur-translated-text {
+  font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', sans-serif;
+  direction: rtl;
+  text-align: right;
+  font-size: 16px;
+  line-height: 1.8;
+  color: #111827;
+  white-space: pre-wrap;
+}
+

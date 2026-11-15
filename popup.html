@@ -1,30 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Urdu Translator</title>
-  <link rel="stylesheet" href="popup.css">
+  <style>
+    body { width: 220px; padding: 15px; font-family: sans-serif; text-align: center; }
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #047857;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover { background: #065f46; }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <h2>Urdu Translator</h2>
-    
-    <div class="toggle-section">
-      <label class="switch">
-        <input type="checkbox" id="toggle-switch">
-        <span class="slider round"></span>
-      </label>
-      <span id="status-text">Extension Enabled</span>
-    </div>
-
-    <hr>
-
-    <div class="pdf-section">
-      <h3>PDF Tools</h3>
-      <button id="open-pdf-btn">Open PDF File</button>
-      <input type="file" id="local-pdf-input" accept="application/pdf" style="display: none;">
-    </div>
-  </div>
+  <h3 style="margin-top:0;">En-Ur Translator</h3>
+  <button id="open-pdf-btn">Open PDF from PC</button>
   <script src="popup.js"></script>
 </body>
 </html>
