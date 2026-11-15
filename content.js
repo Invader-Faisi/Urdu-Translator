@@ -20,22 +20,17 @@
     popup.id = "urdu-translator-popup";
 
     popup.innerHTML = `
-        <div class="ut-header">
-            <span class="ut-title">اردو مترجم</span>
+    <div class="ut-header">
+        <span class="ut-title">اردو مترجم</span>
+
+        <div class="ut-header-actions">
+            <button class="ut-open-pdf" title="Open PDF Translator">
+                📄 Open PDF
+            </button>
+
             <button class="ut-close" title="Close">×</button>
         </div>
-
-        <div class="ut-original"></div>
-
-        <div class="ut-result">
-            Translating...
-        </div>
-
-        <div class="ut-footer">
-            <span class="ut-status">English → Urdu</span>
-            <button class="ut-copy">Copy</button>
-        </div>
-    `;
+    </div>
 
     document.body.appendChild(popup);
 
@@ -70,6 +65,12 @@
     // --------------------------------------------------
 
     closeButton.addEventListener("click", hidePopup);
+    // Open PDF Translator
+    popup.querySelector(".ut-open-pdf").addEventListener("click", () => {
+        chrome.runtime.sendMessage({
+            action: "openPdf"
+        });
+    });
 
     // --------------------------------------------------
     // Copy translation
