@@ -1,26 +1,30 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="popup.css">
-    <title>Urdu Translator</title>
+  <meta charset="UTF-8">
+  <title>Urdu Translator</title>
+  <link rel="stylesheet" href="popup.css">
 </head>
 <body>
-    <div class="container">
-        <h2>اردو مترجم</h2>
-        <p>English to Urdu Translator</p>
-
-        <button id="openPdf">
-            📄 Open PDF Translator
-        </button>
-
-        <div class="info">
-            Hover over a word or select text
-            on webpages to translate.
-        </div>
+  <div class="container">
+    <h2>Urdu Translator</h2>
+    
+    <div class="toggle-section">
+      <label class="switch">
+        <input type="checkbox" id="toggle-switch">
+        <span class="slider round"></span>
+      </label>
+      <span id="status-text">Extension Enabled</span>
     </div>
 
-    <script src="popup.js"></script>
+    <hr>
+
+    <div class="pdf-section">
+      <h3>PDF Tools</h3>
+      <button id="open-pdf-btn">Open PDF File</button>
+      <input type="file" id="local-pdf-input" accept="application/pdf" style="display: none;">
+    </div>
+  </div>
+  <script src="popup.js"></script>
 </body>
 </html>
