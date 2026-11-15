@@ -1,66 +1,169 @@
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Urdu Translator - PDF Reader</title>
+
     <link rel="stylesheet" href="lib/pdf_viewer.css">
     <link rel="stylesheet" href="pdf-viewer.css">
 </head>
+
 <body>
 
-    
-<header class="toolbar">
-    <div class="brand">
-        <span>اردو مترجم</span>
-        <small>PDF Translator</small>
-    </div>
+    <!-- Toolbar -->
+    <header class="toolbar">
 
-    <label for="pdfFile" class="open-button">
-        📂 Open PDF
-    </label>
-
-    <input
-        type="file"
-        id="pdfFile"
-        accept=".pdf,application/pdf"
-        hidden
-    />
-
-    <div class="zoom-controls">
-        <button id="zoomOut" title="Zoom Out">−</button>
-
-        <span id="zoomLevel">100%</span>
-
-        <button id="zoomIn" title="Zoom In">+</button>
-
-        <button id="resetZoom" title="Reset Zoom">Reset</button>
-    </div>
-
-    <span id="status">Select a PDF file to begin</span>
-</header>
-
-
-    <main id="pdfContainer">
-        <div class="welcome">
-            <h2>Welcome to Urdu PDF Translator</h2>
-            <p>Open a PDF and select sentences.</p>
+        <div class="brand">
+            <span>اردو مترجم</span>
+            <small>PDF Translator</small>
         </div>
+
+        <!-- Open PDF -->
+        <label for="pdfFile" class="open-button">
+            📂 Open PDF
+        </label>
+
+        <input
+            type="file"
+            id="pdfFile"
+            accept=".pdf,application/pdf"
+            hidden
+        />
+
+        <!-- Page Navigation -->
+        <div class="page-controls">
+
+            <button
+                id="previousPage"
+                title="Previous Page"
+                disabled
+            >
+                ‹
+            </button>
+
+            <input
+                type="number"
+                id="pageNumber"
+                min="1"
+                value="1"
+                disabled
+                aria-label="Page number"
+            />
+
+            <span id="totalPages">of 0</span>
+
+            <button
+                id="goToPage"
+                disabled
+            >
+                Go
+            </button>
+
+            <button
+                id="nextPage"
+                title="Next Page"
+                disabled
+            >
+                ›
+            </button>
+
+        </div>
+
+        <!-- Zoom Controls -->
+        <div class="zoom-controls">
+
+            <button
+                id="zoomOut"
+                title="Zoom Out"
+                disabled
+            >
+                −
+            </button>
+
+            <span id="zoomLevel">100%</span>
+
+            <button
+                id="zoomIn"
+                title="Zoom In"
+                disabled
+            >
+                +
+            </button>
+
+            <button
+                id="resetZoom"
+                title="Reset Zoom"
+                disabled
+            >
+                Reset
+            </button>
+
+        </div>
+
+        <span id="status">
+            Select a PDF file to begin
+        </span>
+
+    </header>
+
+    <!-- PDF Pages -->
+    <main id="pdfContainer">
+
+        <div class="welcome">
+
+            <h2>Welcome to Urdu PDF Translator</h2>
+
+            <p>
+                Open a PDF, select any word, sentence,
+                or paragraph to translate into Urdu.
+            </p>
+
+            <p>
+                Use the page navigation controls
+                to jump directly to any page.
+            </p>
+
+        </div>
+
     </main>
 
+    <!-- Translation Popup -->
     <div id="translationPopup">
+
         <div class="popup-header">
+
             <strong>اردو مترجم</strong>
-            <button id="closePopup">×</button>
+
+            <button
+                id="closePopup"
+                title="Close"
+            >
+                ×
+            </button>
+
         </div>
 
         <div id="originalText"></div>
-        <div id="translatedText">Translating...</div>
+
+        <div id="translatedText">
+            Translating...
+        </div>
 
         <div class="popup-footer">
+
             <span>English → Urdu</span>
-            <button id="copyTranslation">Copy</button>
+
+            <button id="copyTranslation">
+                Copy
+            </button>
+
         </div>
+
     </div>
 
     <script type="module" src="pdf-viewer.js"></script>
