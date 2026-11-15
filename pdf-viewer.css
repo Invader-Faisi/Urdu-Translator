@@ -84,7 +84,8 @@ body {
     display: none;
     position: fixed;
     z-index: 99999;
-    width: 320px;
+    width: 480px;
+    height: 220px;
     max-width: calc(100vw - 24px);
     background: white;
     border-radius: 12px;
