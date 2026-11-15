@@ -1,214 +1,50 @@
-
-/* =====================================================
-   URDU TRANSLATOR - WEBPAGE POPUP
-===================================================== */
-
 #urdu-translator-popup {
-    position: fixed !important;
-
-    top: 16px !important;
-    right: 16px !important;
-    left: auto !important;
-    bottom: auto !important;
-
-    z-index: 2147483647 !important;
-
-    width: min(600px, calc(100vw - 32px)) !important;
-
-    max-height: calc(100vh - 32px) !important;
-
-    padding: 16px !important;
-
-    box-sizing: border-box !important;
-
-    display: none;
-
-    flex-direction: column;
-
-    background: #ffffff !important;
-    color: #222222 !important;
-
-    border: 1px solid #e5e7eb !important;
-    border-radius: 12px !important;
-
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2) !important;
-
-    font-family: Arial, sans-serif !important;
-
-    overflow: hidden !important;
-
-    text-align: left !important;
+  position: absolute;
+  z-index: 2147483647;
+  width: 300px;
+  background: #ffffff;
+  border: 1px solid #ccd1d1;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: #2c3e50;
+  overflow: hidden;
+  animation: utFadeIn 0.2s ease-out;
 }
 
-/* Show popup */
-
-#urdu-translator-popup.ut-visible {
-    display: flex !important;
+@keyframes utFadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* Header */
-
-#urdu-translator-popup .ut-header {
-    display: flex !important;
-
-    justify-content: space-between !important;
-    align-items: center !important;
-
-    padding-bottom: 12px !important;
-
-    border-bottom: 1px solid #eeeeee !important;
-
-    flex-shrink: 0;
+.ut-header {
+  background: #3498db;
+  color: white;
+  padding: 6px 10px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
 }
 
-#urdu-translator-popup .ut-title {
-    color: #075985 !important;
-
-    font-size: 18px !important;
-    font-weight: bold !important;
+#ut-close {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
 }
 
-#urdu-translator-popup button {
-    cursor: pointer !important;
-    border: none !important;
-    font-family: Arial, sans-serif !important;
-}
-
-#urdu-translator-popup .ut-close {
-    background: transparent !important;
-
-    color: #666666 !important;
-
-    font-size: 25px !important;
-
-    padding: 0 5px !important;
-}
-
-/* Original selected text */
-
-#urdu-translator-popup .ut-original {
-    margin-top: 12px !important;
-
-    padding: 10px !important;
-
-    background: #f8fafc !important;
-
-    border-radius: 7px !important;
-
-    color: #64748b !important;
-
-    font-size: 13px !important;
-    line-height: 1.5 !important;
-
-    overflow-wrap: anywhere !important;
-
-    max-height: 120px !important;
-
-    overflow-y: auto !important;
-}
-
-/* Urdu translation */
-
-#urdu-translator-popup .ut-result {
-    margin-top: 12px !important;
-
-    padding: 15px !important;
-
-    background: #f0f9ff !important;
-
-    border-radius: 8px !important;
-
-    color: #111827 !important;
-
-    font-size: 21px !important;
-
-    line-height: 1.9 !important;
-
-    direction: rtl !important;
-
-    text-align: right !important;
-
-    white-space: pre-wrap !important;
-
-    overflow-wrap: anywhere !important;
-
-    max-height: 55vh !important;
-
-    overflow-y: auto !important;
-}
-
-/* Footer */
-
-#urdu-translator-popup .ut-footer {
-    display: flex !important;
-
-    justify-content: space-between !important;
-    align-items: center !important;
-
-    margin-top: 12px !important;
-
-    padding-top: 10px !important;
-
-    border-top: 1px solid #eeeeee !important;
-
-    font-size: 12px !important;
-
-    color: #777777 !important;
-
-    flex-shrink: 0;
-}
-
-/* Copy button */
-
-#urdu-translator-popup .ut-copy {
-    padding: 8px 15px !important;
-
-    background: #0284c7 !important;
-
-    color: #ffffff !important;
-
-    border-radius: 6px !important;
-
-    font-size: 12px !important;
-}
-
-#urdu-translator-popup .ut-copy:hover {
-    background: #0369a1 !important;
-}
-
-#urdu-translator-popup .ut-header-actions {
-    display: flex !important;
-    align-items: center !important;
-    gap: 10px !important;
-}
-
-#urdu-translator-popup .ut-open-pdf {
-    background: #0284c7 !important;
-    color: #ffffff !important;
-    border: none !important;
-    border-radius: 6px !important;
-    padding: 7px 12px !important;
-    font-size: 12px !important;
-    cursor: pointer !important;
-}
-
-#urdu-translator-popup .ut-open-pdf:hover {
-    background: #0369a1 !important;
-}
-
-/* Responsive */
-
-@media (max-width: 600px) {
-    #urdu-translator-popup {
-        width: calc(100vw - 20px) !important;
-
-        top: 10px !important;
-        right: 10px !important;
-
-        max-height: calc(100vh - 20px) !important;
-    }
-
-    #urdu-translator-popup .ut-result {
-        font-size: 18px !important;
-    }
+.ut-body {
+  padding: 12px;
+  max-height: 150px;
+  overflow-y: auto;
+  direction: rtl; /* Better layout handling for Urdu text */
+  text-align: right;
+  font-size: 15px;
+  background: #fdfefe;
 }
