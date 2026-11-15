@@ -1,0 +1,98 @@
+
+#urdu-translator-popup {
+    position: fixed;
+    z-index: 2147483647;
+
+    width: 310px;
+    max-width: calc(100vw - 24px);
+
+    padding: 14px;
+    box-sizing: border-box;
+
+    background: #ffffff;
+    color: #222222;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+
+    font-family: Arial, sans-serif;
+
+    display: none;
+}
+
+#urdu-translator-popup.ut-visible {
+    display: block;
+}
+
+#urdu-translator-popup .ut-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eeeeee;
+}
+
+#urdu-translator-popup .ut-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #075985;
+}
+
+#urdu-translator-popup button {
+    cursor: pointer;
+    border: none;
+}
+
+#urdu-translator-popup .ut-close {
+    background: transparent;
+    font-size: 23px;
+    color: #666;
+}
+
+#urdu-translator-popup .ut-original {
+    margin-top: 12px;
+    color: #666;
+    font-size: 13px;
+    overflow-wrap: anywhere;
+}
+
+#urdu-translator-popup .ut-result {
+    margin-top: 12px;
+    padding: 12px;
+
+    background: #f0f9ff;
+    border-radius: 8px;
+
+    color: #111827;
+    font-size: 19px;
+    line-height: 1.8;
+
+    direction: rtl;
+    text-align: right;
+    overflow-wrap: anywhere;
+}
+
+#urdu-translator-popup .ut-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-top: 12px;
+    font-size: 11px;
+    color: #777;
+}
+
+#urdu-translator-popup .ut-copy {
+    padding: 6px 12px;
+    background: #0284c7;
+    color: white;
+    border-radius: 6px;
+    font-size: 12px;
+}
+
+#urdu-translator-popup .ut-copy:hover {
+    background: #0369a1;
+}

@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Urdu Translator - PDF Reader</title>
+    <link rel="stylesheet" href="lib/pdf_viewer.css">
+    <link rel="stylesheet" href="pdf-viewer.css">
+</head>
+<body>
+
+    
+<header class="toolbar">
+    <div class="brand">
+        <span>اردو مترجم</span>
+        <small>PDF Translator</small>
+    </div>
+
+    <label for="pdfFile" class="open-button">
+        📂 Open PDF
+    </label>
+
+    <input
+        type="file"
+        id="pdfFile"
+        accept=".pdf,application/pdf"
+        hidden
+    />
+
+    <div class="zoom-controls">
+        <button id="zoomOut" title="Zoom Out">−</button>
+
+        <span id="zoomLevel">100%</span>
+
+        <button id="zoomIn" title="Zoom In">+</button>
+
+        <button id="resetZoom" title="Reset Zoom">Reset</button>
+    </div>
+
+    <span id="status">Select a PDF file to begin</span>
+</header>
+
+
+    <main id="pdfContainer">
+        <div class="welcome">
+            <h2>Welcome to Urdu PDF Translator</h2>
+            <p>Open a PDF and select sentences.</p>
+        </div>
+    </main>
+
+    <div id="translationPopup">
+        <div class="popup-header">
+            <strong>اردو مترجم</strong>
+            <button id="closePopup">×</button>
+        </div>
+
+        <div id="originalText"></div>
+        <div id="translatedText">Translating...</div>
+
+        <div class="popup-footer">
+            <span>English → Urdu</span>
+            <button id="copyTranslation">Copy</button>
+        </div>
+    </div>
+
+    <script type="module" src="pdf-viewer.js"></script>
+
+</body>
+</html>
