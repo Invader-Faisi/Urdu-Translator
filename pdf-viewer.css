@@ -1,68 +1,278 @@
 
+/* =====================================================
+   GENERAL
+===================================================== */
+
 * {
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     margin: 0;
+
     background: #e5e7eb;
+
     font-family: Arial, sans-serif;
-    overflow-y: auto;
+
     overflow-x: hidden;
 }
 
+/* =====================================================
+   TOOLBAR
+===================================================== */
+
 .toolbar {
     position: sticky;
+
     top: 0;
+
     z-index: 1000;
+
     background: #075985;
+
     color: white;
-    padding: 14px 22px;
+
+    padding: 12px 20px;
+
     display: flex;
+
     align-items: center;
-    gap: 20px;
+
+    gap: 16px;
+
+    flex-wrap: wrap;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
+
+/* Brand */
 
 .brand {
     display: flex;
+
     flex-direction: column;
+
     gap: 3px;
+
     margin-right: auto;
+
     font-size: 19px;
+
     font-weight: bold;
 }
 
 .brand small {
     font-size: 11px;
+
     font-weight: normal;
 }
 
+/* Open PDF button */
+
 .open-button {
     background: white;
+
     color: #075985;
-    padding: 10px 17px;
+
+    padding: 10px 16px;
+
     border-radius: 6px;
+
     cursor: pointer;
+
     font-size: 13px;
+
     font-weight: bold;
+
+    white-space: nowrap;
 }
+
+.open-button:hover {
+    background: #e0f2fe;
+}
+
+/* Status */
 
 #status {
     font-size: 12px;
+
+    color: #e0f2fe;
 }
+
+/* =====================================================
+   PAGE NAVIGATION
+===================================================== */
+
+.page-controls {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    background: rgba(255, 255, 255, 0.12);
+
+    padding: 5px 8px;
+
+    border-radius: 8px;
+}
+
+.page-controls button {
+    height: 30px;
+
+    min-width: 32px;
+
+    padding: 0 9px;
+
+    border: none;
+
+    border-radius: 5px;
+
+    background: white;
+
+    color: #075985;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.page-controls button:hover:not(:disabled) {
+    background: #e0f2fe;
+}
+
+.page-controls button:disabled {
+    opacity: 0.4;
+
+    cursor: not-allowed;
+}
+
+#pageNumber {
+    width: 55px;
+
+    height: 30px;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 5px;
+
+    padding: 4px;
+
+    text-align: center;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    outline: none;
+}
+
+#totalPages {
+    color: white;
+
+    font-size: 12px;
+
+    white-space: nowrap;
+}
+
+/* =====================================================
+   ZOOM CONTROLS
+===================================================== */
+
+.zoom-controls {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    background: rgba(255, 255, 255, 0.12);
+
+    padding: 5px 8px;
+
+    border-radius: 8px;
+}
+
+.zoom-controls button {
+    border: none;
+
+    background: white;
+
+    color: #075985;
+
+    border-radius: 5px;
+
+    min-width: 30px;
+
+    height: 29px;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.zoom-controls button:hover:not(:disabled) {
+    background: #e0f2fe;
+}
+
+.zoom-controls button:disabled {
+    opacity: 0.4;
+
+    cursor: not-allowed;
+}
+
+#zoomLevel {
+    min-width: 45px;
+
+    text-align: center;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    color: white;
+}
+
+#resetZoom {
+    font-size: 11px;
+
+    padding: 0 8px;
+}
+
+/* =====================================================
+   PDF CONTAINER
+===================================================== */
 
 #pdfContainer {
     padding: 25px;
+
     display: flex;
+
     flex-direction: column;
+
     align-items: center;
+
     gap: 25px;
 }
 
 .pdf-page {
     position: relative;
+
     background: white;
-    box-shadow: 0 3px 15px rgba(0,0,0,.15);
+
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.15);
+
+    scroll-margin-top: 85px;
+
+    flex-shrink: 0;
 }
 
 .pdf-page canvas {
@@ -71,89 +281,249 @@ body {
 
 .pdf-page .textLayer {
     position: absolute;
+
     inset: 0;
+
     z-index: 2;
+
     overflow: hidden;
 }
 
+/* Welcome screen */
+
 .welcome {
     text-align: center;
+
     margin-top: 100px;
+
+    padding: 20px;
+
     color: #475569;
 }
 
+/* =====================================================
+   PDF TRANSLATION POPUP
+===================================================== */
+
 #translationPopup {
     display: none;
+
     position: fixed;
+
+    top: 16px;
+
+    right: 16px;
+
+    left: auto;
+
+    bottom: auto;
+
     z-index: 99999;
-    width: 480px;
-    height: 220px;
-    max-width: calc(100vw - 24px);
+
+    width: min(600px, calc(100vw - 32px));
+
+    max-height: calc(100vh - 32px);
+
     background: white;
+
     border-radius: 12px;
-    padding: 14px;
-    box-shadow: 0 8px 30px rgba(0,0,0,.2);
+
+    padding: 16px;
+
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.22);
+
     border: 1px solid #ddd;
+
+    overflow: hidden;
+
+    flex-direction: column;
 }
 
 #translationPopup.visible {
-    display: block;
+    display: flex;
 }
 
-.popup-header,
-.popup-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+/* Popup header */
 
 .popup-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
     color: #075985;
+
     border-bottom: 1px solid #eee;
+
     padding-bottom: 10px;
+
+    flex-shrink: 0;
+}
+
+.popup-header strong {
+    font-size: 18px;
 }
 
 .popup-header button {
     background: none;
+
     border: none;
-    font-size: 22px;
+
+    color: #666;
+
+    font-size: 25px;
+
     cursor: pointer;
 }
 
+/* Original text */
+
 #originalText {
     margin-top: 12px;
-    font-size: 12px;
-    color: #777;
+
+    padding: 10px;
+
+    background: #f8fafc;
+
+    border-radius: 7px;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+    color: #64748b;
+
     overflow-wrap: anywhere;
+
+    max-height: 120px;
+
+    overflow-y: auto;
 }
+
+/* Urdu translation */
 
 #translatedText {
     background: #f0f9ff;
+
     border-radius: 8px;
+
     margin-top: 12px;
-    padding: 13px;
-    font-size: 20px;
-    line-height: 1.8;
+
+    padding: 15px;
+
+    font-size: 21px;
+
+    line-height: 1.9;
+
     direction: rtl;
+
     text-align: right;
+
     overflow-wrap: anywhere;
+
+    white-space: pre-wrap;
+
+    max-height: 55vh;
+
+    overflow-y: auto;
+
+    color: #111827;
 }
 
+/* Popup footer */
+
 .popup-footer {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
     margin-top: 12px;
-    font-size: 11px;
+
+    padding-top: 10px;
+
+    border-top: 1px solid #eee;
+
+    font-size: 12px;
+
     color: #777;
+
+    flex-shrink: 0;
 }
 
 #copyTranslation {
     background: #0284c7;
+
     color: white;
+
     border: none;
-    padding: 7px 13px;
+
+    padding: 8px 15px;
+
     border-radius: 5px;
+
     cursor: pointer;
+
+    font-size: 12px;
 }
+
+#copyTranslation:hover {
+    background: #0369a1;
+}
+
+/* =====================================================
+   PDF TEXT LAYER
+===================================================== */
 
 .textLayer {
     z-index: 2 !important;
+}
+
+/* =====================================================
+   RESPONSIVE DESIGN
+===================================================== */
+
+@media (max-width: 950px) {
+
+    .toolbar {
+        gap: 10px;
+    }
+
+    .brand {
+        width: 100%;
+    }
+
+    #status {
+        width: 100%;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .toolbar {
+        padding: 10px;
+    }
+
+    .page-controls,
+    .zoom-controls {
+        max-width: 100%;
+    }
+
+    #translationPopup {
+        width: calc(100vw - 20px);
+
+        top: 10px;
+
+        right: 10px;
+
+        max-height: calc(100vh - 20px);
+    }
+
+    #translatedText {
+        font-size: 18px;
+    }
+
 }
