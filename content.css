@@ -1,53 +1,280 @@
-/* Import Noto Nastaliq Urdu directly from Google Fonts so it works on any website */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;600;700&display=swap");
 
 #en-ur-translator-popup {
   position: fixed !important;
-  top: 20px !important;
-  right: 20px !important;
-  width: 450px !important;
-  max-width: 90vw !important;
-  max-height: 75vh !important;
-  overflow-y: auto !important;
-  background-color: #ffffff !important;
-  color: #1a1a1a !important;
-  border: 1px solid #d1d5db !important;
-  border-top: 4px solid #047857 !important;
-  border-radius: 8px !important;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2) !important;
+
+  top: 18px !important;
+  right: 18px !important;
+
   z-index: 2147483647 !important;
-  padding: 16px !important;
-  font-family: system-ui, -apple-system, sans-serif !important;
+
+  width: 460px !important;
+  max-width: calc(100vw - 30px) !important;
+  max-height: min(78vh, 680px) !important;
+
   display: none;
+
+  overflow: hidden !important;
+
+  color: #e2e8f0 !important;
+  background: #111c2e !important;
+
+  border: 1px solid rgba(148, 163, 184, 0.22) !important;
+  border-radius: 17px !important;
+
+  box-shadow:
+    0 24px 65px rgba(0, 0, 0, 0.32),
+    0 5px 18px rgba(0, 0, 0, 0.18) !important;
+
+  font-family:
+    Inter,
+    "Segoe UI",
+    Arial,
+    sans-serif !important;
+
   box-sizing: border-box !important;
 }
 
-#en-ur-popup-header {
-  display: flex !important;
-  justify-content: space-between !important;
-  align-items: center !important;
-  border-bottom: 1px solid #e5e7eb !important;
-  padding-bottom: 8px !important;
-  margin-bottom: 12px !important;
-  font-size: 13px !important;
-  font-weight: bold !important;
-  color: #047857 !important;
+#en-ur-translator-popup * {
+  box-sizing: border-box !important;
 }
 
-#en-ur-close-btn {
-  background: none !important;
-  border: none !important;
-  font-size: 18px !important;
+/* Header */
+
+#en-ur-popup-header {
+  min-height: 66px !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+
+  padding: 12px 15px !important;
+
+  background:
+    linear-gradient(120deg, #172c42, #102b38) !important;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+
+  font-size: 13px !important;
+}
+
+.en-ur-brand {
+  display: flex !important;
+  align-items: center !important;
+  gap: 11px !important;
+}
+
+.en-ur-brand-icon {
+  width: 38px !important;
+  height: 38px !important;
+
+  display: grid !important;
+  place-items: center !important;
+
+  color: white !important;
+  background: linear-gradient(135deg, #14b8a6, #0f766e) !important;
+
+  border-radius: 11px !important;
+
+  font-size: 22px !important;
+  font-weight: 800 !important;
+}
+
+.en-ur-brand-copy {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;
+}
+
+.en-ur-brand-copy strong {
+  color: #f8fafc !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+}
+
+.en-ur-brand-copy small {
+  color: #94a3b8 !important;
+  font-size: 10px !important;
+}
+
+.en-ur-header-actions {
+  display: flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+}
+
+#en-ur-translator-popup button {
   cursor: pointer !important;
-  color: #6b7280 !important;
+  font-family: inherit !important;
+}
+
+#en-ur-copy-btn,
+#en-ur-close-btn {
+  width: 31px !important;
+  height: 31px !important;
+
+  display: grid !important;
+  place-items: center !important;
+
+  padding: 0 !important;
+
+  color: #cbd5e1 !important;
+  background: rgba(255, 255, 255, 0.07) !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.09) !important;
+  border-radius: 8px !important;
+
+  font-size: 17px !important;
+  line-height: 1 !important;
+
+  transition: 0.2s ease !important;
+}
+
+#en-ur-copy-btn:hover {
+  color: white !important;
+  background: #0f766e !important;
+}
+
+#en-ur-close-btn:hover {
+  color: white !important;
+  background: #b91c1c !important;
+}
+
+/* Main content */
+
+.en-ur-popup-body {
+  max-height: calc(78vh - 105px) !important;
+
+  overflow-y: auto !important;
+
+  padding: 17px 18px !important;
+}
+
+.en-ur-section-label {
+  margin-bottom: 9px !important;
+
+  color: #64748b !important;
+
+  font-size: 9px !important;
+  font-weight: 800 !important;
+  letter-spacing: 1.3px !important;
+}
+
+#en-ur-original-text {
+  padding: 12px 13px !important;
+
+  color: #cbd5e1 !important;
+  background: #1b2a3f !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  border-radius: 10px !important;
+
+  font-size: 12px !important;
+  line-height: 1.65 !important;
+
+  white-space: pre-wrap !important;
+  overflow-wrap: anywhere !important;
+
+  max-height: 150px !important;
+  overflow-y: auto !important;
+}
+
+.en-ur-translation-heading {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+
+  margin-top: 20px !important;
+  margin-bottom: 10px !important;
+
+  color: #5eead4 !important;
+
+  font-size: 15px !important;
+  font-weight: 700 !important;
+}
+
+.en-ur-status {
+  padding: 4px 8px !important;
+
+  color: #99f6e4 !important;
+  background: rgba(20, 184, 166, 0.12) !important;
+
+  border: 1px solid rgba(20, 184, 166, 0.18) !important;
+  border-radius: 20px !important;
+
+  font-size: 8px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.6px !important;
 }
 
 #en-ur-translated-text {
-  font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', sans-serif !important;
+  min-height: 90px !important;
+
+  padding: 15px !important;
+
+  color: #f8fafc !important;
+  background:
+    linear-gradient(145deg, #1b3045, #192b40) !important;
+
+  border: 1px solid rgba(20, 184, 166, 0.19) !important;
+  border-right: 3px solid #14b8a6 !important;
+
+  border-radius: 11px !important;
+
   direction: rtl !important;
   text-align: right !important;
-  font-size: 18px !important;
-  line-height: 1.8 !important;
-  color: #111827 !important;
+
+  font-family:
+    "Noto Nastaliq Urdu",
+    "Jameel Noori Nastaleeq",
+    "Noto Naskh Arabic",
+    serif !important;
+
+  font-size: 19px !important;
+  line-height: 2.1 !important;
+
   white-space: pre-wrap !important;
+  overflow-wrap: anywhere !important;
+}
+
+/* Footer */
+
+.en-ur-popup-footer {
+  min-height: 36px !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+
+  padding: 8px 16px !important;
+
+  color: #64748b !important;
+  background: #0d1726 !important;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
+
+  font-size: 9px !important;
+}
+
+/* Scrollbars */
+
+#en-ur-translator-popup ::-webkit-scrollbar {
+  width: 6px !important;
+}
+
+#en-ur-translator-popup ::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+#en-ur-translator-popup ::-webkit-scrollbar-thumb {
+  background: #475569 !important;
+  border-radius: 10px !important;
+}
+
+@media (max-width: 520px) {
+  #en-ur-translator-popup {
+    top: 10px !important;
+    right: 10px !important;
+    width: calc(100vw - 20px) !important;
+  }
 }

@@ -1,71 +1,642 @@
-body {
-  margin: 0;
-  background-color: #525659;
-  font-family: system-ui, sans-serif;
+:root {
+  --background: #101827;
+  --surface: #182438;
+  --surface-light: #223149;
+  --primary: #14b8a6;
+  --primary-dark: #0f766e;
+  --text: #f8fafc;
+  --muted: #94a3b8;
+  --border: rgba(255, 255, 255, 0.1);
+  --page-background: #ffffff;
+  --reader-background: #dce3ec;
 }
 
-#top-bar {
-  position: fixed;
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  min-height: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--reader-background);
+  color: var(--text);
+  font-family:
+    Inter,
+    "Segoe UI",
+    Arial,
+    sans-serif;
+}
+
+/* -----------------------------------------
+   TOP HEADER
+----------------------------------------- */
+
+.app-header {
+  position: sticky;
   top: 0;
-  left: 0;
-  right: 0;
-  height: 50px;
-  background-color: #1f2937;
-  color: white;
+  z-index: 1000;
+
+  min-height: 76px;
+  width: 100%;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px;
-  z-index: 1000;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  gap: 24px;
+
+  padding: 12px 28px;
+
+  background: rgba(16, 24, 39, 0.97);
+  border-bottom: 1px solid var(--border);
+
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(16px);
 }
 
-.brand { font-weight: bold; color: #34d399; display: flex; align-items: center; }
-.controls { display: flex; align-items: center; gap: 12px; }
-#page-input { width: 70px; padding: 4px 8px; border-radius: 4px; border: none; }
-#go-btn, #zoom-in-btn, #zoom-out-btn { padding: 5px 12px; background: #047857; color: white; border: none; border-radius: 4px; cursor: pointer; }
-#zoom-in-btn:hover, #zoom-out-btn:hover, #go-btn:hover { background: #065f46; }
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.brand-icon {
+  width: 43px;
+  height: 43px;
+
+  display: grid;
+  place-items: center;
+
+  color: white;
+  font-size: 25px;
+  font-weight: 800;
+
+  border-radius: 13px;
+
+  background:
+    linear-gradient(135deg, #14b8a6, #0f766e);
+
+  box-shadow: 0 5px 18px rgba(20, 184, 166, 0.3);
+}
+
+.brand-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.brand-copy strong {
+  font-size: 15px;
+  letter-spacing: 0.2px;
+}
+
+.brand-copy span {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+/* -----------------------------------------
+   TOOLBAR
+----------------------------------------- */
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 13px;
+}
+
+.toolbar-divider {
+  width: 1px;
+  height: 30px;
+  background: var(--border);
+}
+
+.open-file-button,
+.welcome-open-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+
+  cursor: pointer;
+  user-select: none;
+
+  border: 0;
+  border-radius: 10px;
+
+  background: linear-gradient(135deg, #14b8a6, #0f766e);
+  color: #ffffff;
+
+  font-weight: 700;
+  transition: 0.2s ease;
+}
+
+.open-file-button {
+  min-height: 39px;
+  padding: 0 15px;
+  font-size: 12px;
+}
+
+.open-file-button:hover,
+.welcome-open-button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+  box-shadow: 0 8px 20px rgba(20, 184, 166, 0.22);
+}
+
+.button-icon {
+  font-size: 18px;
+}
+
+.page-controls,
+.zoom-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.page-controls {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.page-controls input {
+  width: 52px;
+  height: 34px;
+
+  padding: 5px;
+
+  text-align: center;
+  color: white;
+
+  border: 1px solid var(--border);
+  border-radius: 8px;
+
+  background: var(--surface);
+  outline: none;
+}
+
+.page-controls input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.12);
+}
+
+.page-total {
+  white-space: nowrap;
+}
+
+.page-total strong {
+  color: white;
+}
+
+.icon-button,
+.small-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--border);
+  border-radius: 8px;
+
+  background: var(--surface);
+  color: white;
+
+  cursor: pointer;
+  transition: 0.18s ease;
+}
+
+.icon-button {
+  width: 33px;
+  height: 33px;
+  font-size: 19px;
+}
+
+.small-button {
+  min-height: 32px;
+  padding: 0 10px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.icon-button:hover,
+.small-button:hover {
+  background: var(--surface-light);
+  border-color: rgba(20, 184, 166, 0.65);
+}
+
+button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  transform: none;
+}
+
+#zoom-level {
+  min-width: 46px;
+  text-align: center;
+  color: #e2e8f0;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* -----------------------------------------
+   READER WORKSPACE
+----------------------------------------- */
+
+#reader {
+  min-height: calc(100vh - 112px);
+  padding: 30px 20px 60px;
+  position: relative;
+}
 
 #pdf-container {
-  margin-top: 65px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
-  padding-bottom: 40px;
+  gap: 26px;
+
+  width: 100%;
+  min-height: 500px;
+
+  padding: 10px 0 35px;
 }
 
 .page-wrapper {
   position: relative;
-  background: white;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-}
+  flex: 0 0 auto;
 
-.page-wrapper canvas {
-  display: block;
-}
-
-/* --- Corrected PDF.js Text Layer Positioning --- */
-.textLayer {
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
   overflow: hidden;
-  opacity: 0.2; /* Change to 0.5 temporarily if you want to see where text boxes are aligned */
-  line-height: 1.0;
-  -webkit-user-select: text;
-  -moz-user-select: text;
-  -ms-user-select: text;
-  user-select: text;
-  pointer-events: auto;
+
+  background: var(--page-background);
+
+  border-radius: 3px;
+
+  box-shadow:
+    0 3px 8px rgba(15, 23, 42, 0.14),
+    0 15px 35px rgba(15, 23, 42, 0.13);
+
+  transition: box-shadow 0.2s ease;
 }
 
-.textLayer > span {
-  color: transparent;
+.page-wrapper:hover {
+  box-shadow:
+    0 5px 12px rgba(15, 23, 42, 0.16),
+    0 18px 42px rgba(15, 23, 42, 0.18);
+}
+
+.pdf-canvas {
+  display: block;
+  max-width: none;
+  background: white;
+}
+
+/* PDF.js selectable text layer */
+
+.page-wrapper .textLayer {
   position: absolute;
-  white-space: pre;
+  inset: 0;
+
+  overflow: hidden;
+
+  line-height: 1;
+  text-align: initial;
+
+  opacity: 1;
+
+  user-select: text;
+  -webkit-user-select: text;
   cursor: text;
-  transform-origin: 0% 0%;
+}
+
+.page-wrapper .textLayer ::selection {
+  background: rgba(20, 184, 166, 0.35);
+}
+
+/* -----------------------------------------
+   PAGE PLACEHOLDERS
+----------------------------------------- */
+
+.page-placeholder {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    linear-gradient(
+      145deg,
+      #f8fafc,
+      #e9eef5
+    );
+
+  color: #94a3b8;
+
+  font-size: 13px;
+  letter-spacing: 0.4px;
+}
+
+.page-placeholder::before {
+  content: "";
+  position: absolute;
+
+  width: 34px;
+  height: 34px;
+
+  border: 3px solid #cbd5e1;
+  border-top-color: #14b8a6;
+
+  border-radius: 50%;
+
+  animation: placeholder-spin 0.9s linear infinite;
+
+  transform: translateY(-34px);
+}
+
+@keyframes placeholder-spin {
+  to {
+    transform: translateY(-34px) rotate(360deg);
+  }
+}
+
+.page-error {
+  display: grid;
+  place-items: center;
+
+  height: 100%;
+  padding: 20px;
+
+  color: #b91c1c;
+  background: #fef2f2;
+
+  font-size: 13px;
+}
+
+/* -----------------------------------------
+   WELCOME SCREEN
+----------------------------------------- */
+
+#welcome-screen {
+  min-height: 65vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  padding: 45px 20px;
+}
+
+.welcome-icon {
+  width: 90px;
+  height: 90px;
+
+  display: grid;
+  place-items: center;
+
+  margin-bottom: 22px;
+
+  border-radius: 26px;
+
+  background: linear-gradient(135deg, #ccfbf1, #99f6e4);
+
+  font-size: 43px;
+
+  box-shadow: 0 12px 30px rgba(15, 118, 110, 0.14);
+}
+
+#welcome-screen h1 {
+  margin: 0 0 12px;
+
+  color: #172554;
+
+  font-size: clamp(24px, 4vw, 35px);
+  letter-spacing: -1px;
+}
+
+#welcome-screen p {
+  max-width: 480px;
+  margin: 0 0 27px;
+
+  color: #64748b;
+
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.welcome-open-button {
+  min-height: 47px;
+  padding: 0 22px;
+
+  font-size: 13px;
+}
+
+.welcome-open-button span {
+  font-size: 20px;
+}
+
+.welcome-features {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 35px;
+
+  margin-top: 50px;
+}
+
+.welcome-features div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+}
+
+.welcome-features div > span {
+  color: #0f766e;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.welcome-features strong {
+  color: #334155;
+  font-size: 12px;
+}
+
+.welcome-features small {
+  color: #94a3b8;
+  font-size: 11px;
+}
+
+/* -----------------------------------------
+   LOADING
+----------------------------------------- */
+
+.loading-indicator {
+  position: fixed;
+  z-index: 1500;
+
+  top: 95px;
+  left: 50%;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 13px 18px;
+
+  color: white;
+  background: #182438;
+
+  border: 1px solid var(--border);
+  border-radius: 12px;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+
+  font-size: 12px;
+
+  transform: translateX(-50%);
+}
+
+.loading-spinner {
+  width: 18px;
+  height: 18px;
+
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-top-color: var(--primary);
+
+  border-radius: 50%;
+
+  animation: spinner 0.8s linear infinite;
+}
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* -----------------------------------------
+   ERROR
+----------------------------------------- */
+
+#error-message {
+  position: fixed;
+  z-index: 2000;
+
+  top: 100px;
+  left: 50%;
+
+  max-width: calc(100vw - 30px);
+  padding: 12px 18px;
+
+  color: #991b1b;
+  background: #fee2e2;
+
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+
+  font-size: 12px;
+  text-align: center;
+
+  transform: translateX(-50%);
+}
+
+/* -----------------------------------------
+   FOOTER
+----------------------------------------- */
+
+.reader-footer {
+  position: fixed;
+  z-index: 900;
+
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  min-height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 20px;
+
+  color: #cbd5e1;
+  background: #101827;
+
+  border-top: 1px solid var(--border);
+
+  font-size: 10px;
+}
+
+/* -----------------------------------------
+   RESPONSIVE
+----------------------------------------- */
+
+@media (max-width: 1050px) {
+  .app-header {
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 12px 16px;
+  }
+
+  .toolbar {
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 650px) {
+  .app-header {
+    padding: 10px;
+  }
+
+  .brand-copy span {
+    display: none;
+  }
+
+  .toolbar {
+    gap: 7px;
+  }
+
+  .toolbar-divider {
+    display: none;
+  }
+
+  .page-controls,
+  .zoom-controls {
+    gap: 5px;
+  }
+
+  .open-file-button {
+    padding: 0 9px;
+  }
+
+  #reader {
+    padding: 18px 8px 50px;
+  }
+
+  .welcome-features {
+    gap: 20px;
+  }
+
+  .reader-footer {
+    padding: 0 10px;
+  }
+}
+
+[hidden] {
+  display: none !important;
 }
